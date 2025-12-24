@@ -14,6 +14,7 @@ pygame.display.set_caption(title)
 
 Surface = pygame.Surface((100,200))
 Surface.fill("orange")
+x = 100
 
 
 while running:
@@ -27,7 +28,8 @@ while running:
 
     # Draw the Game
     display_surface.fill("darkgray")
-    display_surface.blit(Surface, (100,150)
+    x += 0.1
+    display_surface.blit(Surface, (x,150))
     pygame.display.update()
 
 
