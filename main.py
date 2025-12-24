@@ -1,9 +1,10 @@
 import pygame
+from random import randint
 from os.path import join
 
 pygame.init()
-windowWidth, windowHeight = 1280, 720
-display_surface = pygame.display.set_mode((windowWidth,windowHeight))
+window_width, window_height = 1280, 720
+display_surface = pygame.display.set_mode((window_width,window_height))
 running = True
 
 # Game Title and Icon
@@ -18,7 +19,10 @@ Surface.fill("orange")
 x = 100
 
 # Importing an Image
-player_surface = pygame.image.load(join("images", "player.png"))
+player_surface = pygame.image.load(join("images", "player.png")).convert_alpha()
+star_surface = pygame.image.load(join("images", "star.png")).convert_alpha()
+star_positions = [(randint(0,window_width),randint(0,window_height)) for i in range(20)]
+
 
 while running:
     # Event Loop
@@ -28,11 +32,15 @@ while running:
 
 
 
-
     # Draw the Game
-    display_surface.fill("darkgray")
+    display_surface.fill("black")
     x += 0.1
     display_surface.blit(player_surface, (x,150))
+
+    # Star Background
+    for position in star_positions:
+        display_surface.blit(star_surface, position)
+
     pygame.display.update()
 
 
