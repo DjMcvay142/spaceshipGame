@@ -34,12 +34,15 @@ while running:
 
     # Draw the Game
     display_surface.fill("black")
-    x += 0.1
-    display_surface.blit(player_surface, (x,150))
 
     # Star Background
     for position in star_positions:
         display_surface.blit(star_surface, position)
+
+    x += 0.1
+    display_surface.blit(player_surface, (x,150))
+
+
 
     pygame.display.update()
 
