@@ -6,6 +6,7 @@ pygame.init()
 window_width, window_height = 1280, 720
 display_surface = pygame.display.set_mode((window_width,window_height))
 running = True
+clock = pygame.time.Clock()
 
 # Game Title and Icon
 
@@ -18,7 +19,7 @@ Surface = pygame.Surface((100,200))
 Surface.fill("orange")
 x = 100
 
-# Importing an Image
+# Imports
 player_surface = pygame.image.load(join("images", "player.png")).convert_alpha()
 player_rect = player_surface.get_frect(center = (window_width / 2, window_height / 2))
 player_direction = 1
@@ -34,6 +35,9 @@ laser_rect = laser_surface.get_rect(bottomleft = (20, window_height - 20))
 
 
 while running:
+
+    clock.tick()
+
     # Event Loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -53,12 +57,9 @@ while running:
 
 
 
-
-    player_rect.x += player_direction * 0.4
-    if player_rect.right > window_width or player_rect.left < 0:
-        player_direction *= -1
-
-
+    # Player Movement
+    player_rect.x += 20
+    player_rect.y -= 10
     display_surface.blit(player_surface, player_rect)
 
 
