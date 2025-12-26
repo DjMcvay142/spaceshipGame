@@ -44,7 +44,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            running = False
+        if event.type == pygame.MOUSEMOTION:
+            player_rect.center = event.pos
 
 
     # Draw the Game
@@ -57,15 +60,6 @@ while running:
     # Meteor & Laser
     display_surface.blit(meteor_surface, meteor_rect)
     display_surface.blit(laser_surface, laser_rect)
-
-    # Player Movement
-    if player_rect.bottom >= window_height or player_rect.top <= 0:
-        player_direction.y *= -1
-    if player_rect.right >= window_width or player_rect.left <= 0:
-        player_direction.x *= -1
-
-
-    player_rect.center += player_direction * player_speed * delta_time
     display_surface.blit(player_surface, player_rect)
 
 
