@@ -22,8 +22,8 @@ x = 100
 # Imports
 player_surface = pygame.image.load(join("images", "player.png")).convert_alpha()
 player_rect = player_surface.get_frect(center = (window_width / 2, window_height / 2))
-player_direction = pygame.math.Vector2(1, 1)
-player_speed = 1000
+player_direction = pygame.math.Vector2()
+player_speed = 300
 
 star_surface = pygame.image.load(join("images", "star.png")).convert_alpha()
 star_positions = [(randint(0,window_width),randint(0,window_height)) for i in range(20)]
@@ -46,8 +46,14 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
-        if event.type == pygame.MOUSEMOTION:
-            player_rect.center = event.pos
+
+
+    # Input
+    keys = pygame.key.get_pressed()
+    player_direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
+    player_direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+
+    player_rect.center += player_direction * player_speed * delta_time
 
 
     # Draw the Game
